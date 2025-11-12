@@ -33,26 +33,48 @@
   </main>
 
   <script>
-    // If you want to change the flag, edit the text inside the .flag element above.
-    (function () {
-      const revealBtn = document.getElementById('reveal');
-      const hideBtn = document.getElementById('hide');
-      const flagContainer = document.getElementById('flag-container');
-
-      revealBtn.addEventListener('click', () => {
-        flagContainer.setAttribute('aria-hidden', 'false');
-        flagContainer.classList.add('visible');
-        revealBtn.classList.add('hidden');
-        hideBtn.classList.remove('hidden');
-      });
-
-      hideBtn.addEventListener('click', () => {
-        flagContainer.setAttribute('aria-hidden', 'true');
-        flagContainer.classList.remove('visible');
-        revealBtn.classList.remove('hidden');
-        hideBtn.classList.add('hidden');
-      });
-    })();
-  </script>
+  (function () {
+    const revealBtn = document.getElementById('reveal');
+    const hideBtn = document.getElementById('hide');
+    const flagContainer = document.getElementById('flag-container');
+ 
+    revealBtn.addEventListener('click', () => {
+      // Show popup message
+      const popup = document.createElement('div');
+      popup.style.position = 'fixed';
+      popup.style.top = '0';
+      popup.style.left = '0';
+      popup.style.width = '100%';
+      popup.style.height = '100%';
+      popup.style.backgroundColor = 'rgba(0, 0, 0, 0.85)';
+      popup.style.color = 'red';
+      popup.style.display = 'flex';
+      popup.style.flexDirection = 'column';
+      popup.style.justifyContent = 'center';
+      popup.style.alignItems = 'center';
+      popup.style.fontSize = '3rem';
+      popup.style.zIndex = '9999';
+      popup.innerHTML = `
+<p><strong>U R HACKED</strong></p>
+<p style="font-size: 1.5rem; color: white;">Try again. Looking for the flag? Go to <a href="https://xyz" style="color: cyan;" target="_blank">this website</a>.</p>
+<button style="margin-top: 20px; padding: 10px 20px; font-size: 1rem;" onclick="this.parentElement.remove()">Close</button>
+      `;
+      document.body.appendChild(popup);
+ 
+      // Show flag as usual
+      flagContainer.setAttribute('aria-hidden', 'false');
+      flagContainer.classList.add('visible');
+      revealBtn.classList.add('hidden');
+      hideBtn.classList.remove('hidden');
+    });
+ 
+    hideBtn.addEventListener('click', () => {
+      flagContainer.setAttribute('aria-hidden', 'true');
+      flagContainer.classList.remove('visible');
+      revealBtn.classList.remove('hidden');
+      hideBtn.classList.add('hidden');
+    });
+  })();
+</script>
 </body>
 </html>
