@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Seminar Resource</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="card">
+    <header>
+      <h1>Welcome to the Elastic Investigation Lab</h1>
+      <p class="subtitle">Find the evidence in Elastic — the resource is available at the URL below.</p>
+    </header>
+
+    <section class="content">
+      <p>We’ve placed a resource on our web host for you to investigate. When you find the request/URL in Elastic, open it to reveal the flag.</p>
+
+      <!-- Edit this value to change the flag -->
+      <div id="flag-container" aria-hidden="true">
+        <p id="flag" class="flag">FLAG{elastic-fun-2025}</p>
+      </div>
+
+      <div class="controls">
+        <button id="reveal">Reveal flag</button>
+        <button id="hide" class="hidden">Hide flag</button>
+      </div>
+
+      <footer class="note">
+        <p>Note: this page is intentionally simple. The flag will only appear when you click “Reveal flag”.</p>
+      </footer>
+    </section>
+  </main>
+
+  <script>
+    // If you want to change the flag, edit the text inside the .flag element above.
+    (function () {
+      const revealBtn = document.getElementById('reveal');
+      const hideBtn = document.getElementById('hide');
+      const flagContainer = document.getElementById('flag-container');
+
+      revealBtn.addEventListener('click', () => {
+        flagContainer.setAttribute('aria-hidden', 'false');
+        flagContainer.classList.add('visible');
+        revealBtn.classList.add('hidden');
+        hideBtn.classList.remove('hidden');
+      });
+
+      hideBtn.addEventListener('click', () => {
+        flagContainer.setAttribute('aria-hidden', 'true');
+        flagContainer.classList.remove('visible');
+        revealBtn.classList.remove('hidden');
+        hideBtn.classList.add('hidden');
+      });
+    })();
+  </script>
+</body>
+</html>
